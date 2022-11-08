@@ -20,43 +20,86 @@ col_layout = [
 
 layout=[
     [sg.Text("")],
-    [sg.Text("First Name: "), sg.Text(size=(40,1), key='OUTPUT1')],
+    [sg.Text("Make: "), sg.Text(size=(40,1), key='OUTPUT1')],
     [sg.InputText()],
     [sg.Text("")],    
-    [sg.Text("Last Name: "), sg.Text(size=(40,1), key='OUTPUT2')], 
+    [sg.Text("Model: "), sg.Text(size=(40,1), key='OUTPUT2')], 
     [sg.InputText()], 
     [sg.Text("")],
-    [sg.Text("Email: "), sg.Text(size=(40,1), key='OUTPUT3')], 
+    [sg.Text("Serial Number: "), sg.Text(size=(40,1), key='OUTPUT3')], 
     [sg.InputText()],
     [sg.Text("")],
-    [sg.Text(size=(60,1),key='OUTPUT4')],
+    [sg.Text("Asset Number: "), sg.Text(size=(40,1), key='OUTPUT4')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("Assigned Location: "), sg.Text(size=(40,1), key='OUTPUT5')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("Incident Number: "), sg.Text(size=(40,1), key='OUTPUT6')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("Reason For Repair: "), sg.Text(size=(40,1), key='OUTPUT7')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("In Posession Of: "), sg.Text(size=(40,1), key='OUTPUT8')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("Date: "), sg.Text(size=(40,1), key='OUTPUT9')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("Date Received: "), sg.Text(size=(40,1), key='OUTPUT10')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("Timestamp: "), sg.Text(size=(40,1), key='OUTPUT11')], 
+    [sg.InputText()],
+    [sg.Text("")],
+    [sg.Text("Email Address: "), sg.Text(size=(40,1), key='OUTPUT12')], 
+    [sg.InputText()],
     [sg.Text("")],
     [sg.Text("")],
     [sg.Column(col_layout, element_justification='center', expand_x=True)],
 ]
 
-window = sg.Window("Sheets App",layout, size=(500,300))
+window = sg.Window("Sheets App",layout, size=(400,800))
 
 def Save_Data():
-    first = values[0]
-    last = values[1]
-    email = values[2]
+    make = values[0]
+    model = values[1]
+    serial = values[2]
+    asset = values[3]
+    location = values[4]
+    incident = values[5]
+    reason = values[6]
+    posession = values[7]
+    date = values[8]
+    received = values[9]
+    timestamp = values[10]
+    email = values[11]
 
-    window['OUTPUT1'].update(first)
-    window['OUTPUT2'].update(last)
-    window['OUTPUT3'].update(email)
+    window['OUTPUT1'].update(make)
+    window['OUTPUT2'].update(model)
+    window['OUTPUT3'].update(serial)
+    window['OUTPUT4'].update(asset)
+    window['OUTPUT5'].update(location)
+    window['OUTPUT6'].update(incident)
+    window['OUTPUT7'].update(reason)
+    window['OUTPUT8'].update(posession)
+    window['OUTPUT9'].update(date)
+    window['OUTPUT10'].update(received)
+    window['OUTPUT11'].update(timestamp)
+    window['OUTPUT12'].update(email)
 
     with open('test.csv', 'a', newline='') as csvfile:
-        fieldnames = ['first','last','email']
+        fieldnames = ['Make','Model','Serial Number','Asset Number','Assigned Location','Incident Number','Reason for Repair','In Posessin Of','Date','Timestamp','Email Address']
         csv_writer = csv.DictWriter(csvfile,fieldnames=fieldnames)
-        csv_writer.writerow({'first': first,'last': last,'email': email})
+        csv_writer.writerow({'Make':make,'Model':model,'Serial Number':serial,'Asset Number':asset,'Assigned Location':location,'Incident Number':incident,'Reason for Repair':reason,'In Posessin Of':posession,'Date':date,'Timestamp':timestamp,'Email Address':email})
 
 def readcsv():
     with open('test.csv', 'r') as csvfile:
         csv_reader = csv.DictReader(csvfile)
 
         for line in csv_reader:
-            window['OUTPUT4'].update(line)
+            window['OUTPUT14'].update(line)
 
     #        print(line['first'])
 
